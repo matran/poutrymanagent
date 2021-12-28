@@ -1,0 +1,30 @@
+
+<div class="container dialog-wrap">
+    <form  [formGroup]="incomecategoryForm" autocomplete="off" novalidate (ngSubmit)="doAction()">
+    <div mat-dialog-content>
+      <div *ngIf="action != 'Delete'; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+
+       <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="local_data.name"  placeholder="Name" formControlName="name" >
+        <mat-error *ngIf="hasError('name', 'required')">required</mat-error>
+      </mat-form-field>
+    
+   
+      
+
+    </ng-template>
+    <ng-template #elseBlock>Sure to delete?</ng-template>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button  type="button"  (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+        <button *ngIf="action != 'Delete'" mat-button type="submit" [disabled]="!incomecategoryForm.valid">{{action}}</button>
+        <button *ngIf="action == 'Delete'" mat-button (click)="doAction()">{{action}}</button>
+      </div>
+    </form>
+   
+
+
+
+

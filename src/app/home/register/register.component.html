@@ -1,0 +1,68 @@
+<div class="container form-wrapper">
+    <div class="row d-flex justify-content-center ">
+    <mat-card class="register-section d-flex justify-content-center">
+        <form [formGroup]="registerForm" autocomplete="off" novalidate (ngSubmit)="onFormSubmit(registerForm.value)">
+
+          <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput   formControlName="name">
+                <mat-error *ngIf="registerForm.hasError('required', 'name')">
+                  required
+              </mat-error>
+              </mat-form-field>
+            </div>
+           
+            <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Enter Email address"  formControlName="email">
+            <mat-error *ngIf="registerForm.hasError('required', 'email')">
+              Email address is required
+               </mat-error>
+               <mat-error *ngIf="registerForm.hasError('email', 'email')">
+                Invalid Email address
+                 </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.hasError('required', 'password')">
+                   password is required
+                   </mat-error>
+                   <mat-error *ngIf="registerForm.hasError('minlength', 'password')">
+                    Password must be more than 6 characters
+                    </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Confirm Password" formControlName="confirmpassword" [errorStateMatcher]="matcher">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+
+                <mat-error *ngIf="registerForm.hasError('notSame')">
+                  Password does not match
+                  </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row d-flex justify-content-center ">
+            <button class="buttonsubmit" mat-button mat-raised-button type="submit"  color="primary">Register</button>
+        </div>
+        <div class="row d-flex justify-content-end" style="margin-top: 30px;color: blueviolet;"> 
+        </div>
+        </form>
+        <div class="center"><mat-spinner mode="indeterminate" *ngIf="IsWait"  diameter="30" style="margin:0 auto;">
+        </mat-spinner>
+      </div>
+    </mat-card>
+    </div>
+    </div>
+    

@@ -1,0 +1,55 @@
+
+  <div class="tablewrap">
+    <button (click)="refresh()"  matTooltip="refresh data" mat-fab color="accent" style="float: left;margin-bottom: 20px;">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <div style="float: right;margin-bottom: 10px;">
+      <button disabled mat-button mat-flat-button color="accent" (click)="openDialog('Add',{})" >Add New</button> 
+    </div>
+    <mat-progress-bar style="background-color: maroon;" mode="indeterminate" *ngIf="IsWait" ></mat-progress-bar>
+       <div class="mat-elevation-z8 tbtimetable ">
+        <mat-form-field style="width: 200px;">
+          <mat-label>Search...</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Enter search key">
+        </mat-form-field>
+       <table mat-table [dataSource]="dataSource" matSort>
+     
+             <ng-container matColumnDef="id">
+           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+           <td mat-cell *matCellDef="let expensecategory"> {{expensecategory.id}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="name">
+           <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+           <td mat-cell *matCellDef="let expensecategory"> {{expensecategory.name}} </td>
+         </ng-container>
+
+       
+                        
+         <ng-container matColumnDef="action" >
+           <th  mat-header-cell *matHeaderCellDef> Action </th>
+           <td mat-cell *matCellDef="let expensecategory" class="action-link"> 
+             <button disabled  mat-button (click)="openDialog('Update',expensecategory)"><mat-icon color="accent">edit</mat-icon></button> 
+             <button disabled mat-button (click)="openDialog('Delete',expensecategory)"><mat-icon color="accent">delete</mat-icon></button> 
+             
+            </td>
+         </ng-container>
+
+       
+       
+         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       </table>
+       <mat-spinner *ngIf="IsWaits" class="center" diameter="40"></mat-spinner>
+       <mat-paginator #paginator [pageIndex]=0 [pageSize]=10 (page)="getNext($event)">
+      </mat-paginator>
+      <div *ngIf="isnotfound"  class="text-center"><h3>No Records Found</h3></div> 
+       </div>
+     </div>
+     
+       
+       
+   
+
+
+

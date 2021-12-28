@@ -1,0 +1,42 @@
+
+<div class="container">
+ 
+<div class="row d-flex justify-content-center form-wrapper">
+ 
+<mat-card class="login-section d-flex justify-content-center">
+  
+    <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="onFormSubmit(loginForm.value)">
+      <div class="row"><mat-progress-bar style="background-color: maroon;" mode="indeterminate" *ngIf="IsWait" ></mat-progress-bar></div> 
+        <div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Enter Email address"  formControlName="email">
+        <mat-error *ngIf="loginForm.hasError('required', 'email')">
+          Email is required
+      </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password" formControlName="password">
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.hasError('required', 'password')">
+              Password is required
+          </mat-error>
+      </mat-form-field>
+    </div>
+  
+
+    <div class="row d-flex justify-content-center ">
+        <button class="buttonsubmit" mat-button mat-raised-button type="submit" color="primary">Login</button>
+    </div>
+    <div class="row d-flex justify-content-end" style="margin-top: 30px;color: blueviolet;"> 
+      <a routerLink="/register">Create Account</a>
+    </div>
+    </form>
+</mat-card>
+</div>
+</div>

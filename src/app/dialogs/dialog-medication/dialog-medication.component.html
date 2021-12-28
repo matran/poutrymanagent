@@ -1,0 +1,58 @@
+
+<div class="container dialog-wrap">
+    <form  [formGroup]="medicationForm" autocomplete="off" novalidate (ngSubmit)="doAction()">
+    <div mat-dialog-content>
+      <div *ngIf="action != 'Delete'; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="local_data.date"  placeholder="Date" formControlName="date" readonly='true'>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+             <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="hasError('date', 'required')">required</mat-error>
+        </mat-form-field>
+
+       
+        <mat-form-field appearance="outline">
+          <mat-label>Batch No</mat-label>
+          <mat-select  [(ngModel)]="local_data.batch"  formControlName="batch" >
+            <mat-option *ngFor="let chick of chicks; let i = index" [value]="chicks[i].batchno">
+           {{chicks[i].batchno}}
+         </mat-option>
+         </mat-select>
+          <mat-error *ngIf="hasError('batch', 'required')">required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" [(ngModel)]="local_data.quantity"   formControlName="quantity" >
+          <mat-error *ngIf="hasError('quantity', 'required')">required</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cost Per Medicine</mat-label>
+          <input matInput [(ngModel)]="local_data.cost" formControlName="cost" >
+          <mat-error *ngIf="hasError('cost', 'required')">required</mat-error>
+        </mat-form-field>
+
+       <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="local_data.name"   formControlName="name" >
+        <mat-error *ngIf="hasError('name', 'required')">required</mat-error>
+      </mat-form-field>
+    
+     
+ 
+    </ng-template>
+    <ng-template #elseBlock>Sure to delete?</ng-template>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button  type="button"  (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+        <button *ngIf="action != 'Delete'" mat-button type="submit" [disabled]="!medicationForm.valid">{{action}}</button>
+        <button *ngIf="action == 'Delete'" mat-button (click)="doAction()">{{action}}</button>
+      </div>
+    </form>
+   
+

@@ -1,0 +1,78 @@
+
+<div class="container dialog-wrap">
+    <form  [formGroup]="chickForm" autocomplete="off" novalidate (ngSubmit)="doAction()">
+    <div mat-dialog-content>
+      <div *ngIf="action != 'Delete'; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+
+       <mat-form-field appearance="outline">
+        <mat-label>Batch No</mat-label>
+        <input matInput [(ngModel)]="local_data.batchno"  placeholder="Batch No" formControlName="batchno" >
+        <mat-error *ngIf="hasError('batchno', 'required')">required</mat-error>
+      </mat-form-field>
+    
+     
+      <mat-form-field appearance="outline" >
+        <mat-label>Date Received</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="local_data.datein" placeholder="Date In"  formControlName="datein" readonly='true'>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('datein', 'required')">required</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" >
+        <mat-label>Breed</mat-label>
+        <mat-select  [(ngModel)]="local_data.breed"  formControlName="breed" >
+          <mat-option *ngFor="let category of categories; let i = index" [value]="categories[i].breed">
+      {{categories[i].breed}}
+       </mat-option>
+       </mat-select>
+      <mat-error *ngIf="hasError('breed', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>No of Birds Received</mat-label>
+        <input matInput  type="number" [(ngModel)]="local_data.currentstock"  formControlName="currentstock" >
+        <mat-error *ngIf="hasError('currentstock', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Cost per chick</mat-label>
+        <input matInput [(ngModel)]="local_data.cost"  formControlName="cost" >
+        <mat-error *ngIf="hasError('cost', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Pen</mat-label>
+        <input matInput [(ngModel)]="local_data.house"  placeholder="Pen" formControlName="house" >
+        <mat-error *ngIf="hasError('house', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Current Age</mat-label>
+        <input matInput [(ngModel)]="local_data.currentage"  formControlName="currentage" >
+        <mat-error *ngIf="hasError('currentage', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Person In Charge</mat-label>
+        <input matInput [(ngModel)]="local_data.personincharge"  placeholder="Person In Charge" formControlName="personincharge" >
+        <mat-error *ngIf="hasError('personincharge', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Transfered To Pen(optional)</mat-label>
+        <input matInput [(ngModel)]="local_data.transferedtopen"  placeholder="transferedtopen" formControlName="transferedtopen" >
+        
+      </mat-form-field>
+
+    </ng-template>
+    <ng-template #elseBlock>Sure to delete?</ng-template>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button  type="button"  (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+        <button *ngIf="action != 'Delete'" mat-button type="submit" [disabled]="!chickForm.valid">{{action}}</button>
+        <button *ngIf="action == 'Delete'" mat-button (click)="doAction()">{{action}}</button>
+      </div>
+    </form>
+   

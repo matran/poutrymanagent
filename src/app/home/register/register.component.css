@@ -1,0 +1,20 @@
+.register-section{
+    padding: 40px;
+}
+.mat-form-field {
+ width: 300px;
+}
+.form-wrapper{
+   padding-top: 70px !important;
+}
+.buttonsubmit{
+    width: 300px;
+}
+.center {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}

@@ -1,0 +1,59 @@
+table {
+    width: 100%;
+    
+  }
+  .tablewrap{
+    margin-top: 40px;
+  
+  }
+   .top-row{
+     margin-bottom: 10px;
+   }
+
+   .tbtimetable {
+    overflow-x: scroll;
+    width: 100%;
+   }
+
+
+  
+   .center {
+    top: 50%;
+    left: 50%;
+    position:   fixed;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    z-index:    1000;
+}
+
+mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+mat-label {
+  margin-left: 10px;
+}
+input {
+  margin-left: 10px;
+}
+
+.firstrow{
+  margin-top: 40px;
+}
+.secondrow{
+ margin-top: 40px;
+ margin-bottom: 30px;
+}
+.firstrowcards{
+  height: 100px;
+}
+
+table {
+  width: 100%;
+  
+}
+.tablewrap{
+  margin-top: 40px;
+
+}

@@ -1,0 +1,41 @@
+body {
+  -webkit-print-color-adjust: exact;
+}
+table {
+    -webkit-print-color-adjust: exact;
+      margin-top: 160px;
+    }
+   tr {
+     -webkit-print-color-adjust: exact;
+     }
+
+  td {
+      font-size: 15px;
+      padding-bottom: 16px;
+      font-weight: bolder;
+      -webkit-print-color-adjust: exact;
+    }
+  .tdleft {
+    font-weight: bold;
+    -webkit-print-color-adjust: exact;
+    padding-left: 195px;
+    white-space: nowrap;
+  }
+  .tdno {
+    font-size:15px;
+    padding-bottom: 25px;
+  }
+  .tdright {
+    font-weight: bold;
+    -webkit-print-color-adjust: exact;
+    padding-left: 240px ;
+    padding-right: 0px;
+    white-space: nowrap;
+  }
+
+  .tdkinmobile {
+    padding-left: 350px  !important;
+  }
+  @page {
+    margin:0px;
+  }

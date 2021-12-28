@@ -1,0 +1,72 @@
+<div class="tablewrap">
+  <button (click)="refresh()"  matTooltip="refresh data" mat-fab color="accent" style="float: left;margin-bottom: 20px;">
+    <mat-icon>refresh</mat-icon>
+  </button>
+   <div style="float: right;margin-bottom: 10px;">
+    <button style="margin-right: 5px;"  mat-raised-button color="accent" (click)="print()" matTooltip="print" color="primary" >
+      Print
+   </button>
+   <button style="margin-right: 5px;"  mat-raised-button color="accent" (click)="openDialogBatchDateRange()" matTooltip="filter by date and batch" color="primary" >
+    Filter By Date and Batch
+   </button>
+    <button style="margin-right: 5px;"  mat-raised-button color="accent" (click)="openDialogDateRange()" matTooltip="filter by date" color="primary" >
+      Filter By Date
+    </button>
+    <button  style="margin-right: 5px;"  mat-button mat-flat-button color="primary" (click)="openDialogBatch()" >Filter By Batch </button>
+    <button style="margin-right: 5px;"  mat-raised-button color="accent" (click)="exportExcel()" matTooltip="Export As Excel" color="primary" >
+      <mat-icon>cloud_download</mat-icon>
+      EXPORT
+  </button>
+    </div>
+  <mat-progress-bar style="background-color: maroon;" mode="indeterminate" *ngIf="IsWait" ></mat-progress-bar>
+     <div class="mat-elevation-z8 tbtimetable ">
+      <mat-form-field style="width: 200px;">
+        <mat-label>Search...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Enter search key">
+      </mat-form-field>
+     <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+        <td mat-cell *matCellDef="let report"> {{report.date}} </td>
+        <td mat-footer-cell *matFooterCellDef>Total</td>
+      </ng-container>
+      <ng-container matColumnDef="batch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Batch</th>
+        <td mat-cell *matCellDef="let report"> {{report.batch}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+       <ng-container matColumnDef="income">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>Income</th>
+         <td mat-cell *matCellDef="let report"> {{report.income}} </td>
+         <td mat-footer-cell *matFooterCellDef>{{getTotalCostIncome()}}</td>
+       </ng-container>
+       <ng-container matColumnDef="expense">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Expense</th>
+        <td mat-cell *matCellDef="let report"> {{report.expense}} </td>
+        <td mat-footer-cell *matFooterCellDef>{{getTotalCostExpense()}}</td>
+      </ng-container>
+     
+      <ng-container matColumnDef="profit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Profit</th>
+        <td mat-cell *matCellDef="let report"> {{report.profit}} </td>
+        <td mat-footer-cell *matFooterCellDef>{{getTotalCostProfit()}}</td>
+      </ng-container>
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+     </table>
+     <mat-spinner *ngIf="IsWaits" class="center" diameter="40"></mat-spinner>
+     <mat-paginator #paginator [pageIndex]=0 [pageSize]=10 (page)="getNext($event)">
+    </mat-paginator>
+    <div *ngIf="isnotfound"  class="text-center"><h3>No Records Found</h3></div> 
+   </div>
+   </div>
+   
+     
+     
+ 
+
+
+

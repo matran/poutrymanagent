@@ -1,0 +1,27 @@
+<div class="container dialog-wrap">
+    <h1 mat-dialog-title>Date Range</h1>
+    <form [formGroup]="reportForm" autocomplete="off" novalidate (ngSubmit)="doAction()">
+    <div mat-dialog-content>
+          <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startdate" formControlName="startdate" readonly='true'>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('startdate', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker2"   [(ngModel)]="enddate" formControlName="enddate" readonly='true'>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="hasError('enddate', 'required')">required</mat-error>
+      </mat-form-field>
+        </div>
+    <div mat-dialog-actions>
+      <button mat-button  type="button"  (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+      <button mat-button (click)="doAction()"[disabled]="!reportForm.valid">Generate</button>
+    </div>
+    </form>
+    </div>
+

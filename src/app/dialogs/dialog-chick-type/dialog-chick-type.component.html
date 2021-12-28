@@ -1,0 +1,34 @@
+
+<div class="container dialog-wrap">
+    <form  [formGroup]="chickForm" autocomplete="off" novalidate (ngSubmit)="doAction()">
+    <div mat-dialog-content>
+      <div *ngIf="action != 'Delete'; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+          
+      <mat-form-field appearance="outline" >
+        <mat-label>Type</mat-label>
+        <input matInput [(ngModel)]="local_data.type" placeholder="Type" formControlName="type" >
+        <mat-error *ngIf="hasError('type', 'required')">required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Strain/Breed</mat-label>
+        <input matInput [(ngModel)]="local_data.breed" placeholder="Breed" formControlName="breed" >
+        <mat-error *ngIf="hasError('breed', 'required')">required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <mat-label>Purpose</mat-label>
+        <input matInput [(ngModel)]="local_data.purpose"  placeholder="Purpose" formControlName="purpose" >
+        <mat-error *ngIf="hasError('purpose', 'required')">required</mat-error>
+      </mat-form-field>
+    </ng-template>
+    <ng-template #elseBlock>Sure to delete?</ng-template>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button  type="button"  (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+        <button *ngIf="action != 'Delete'" mat-button type="submit" [disabled]="!chickForm.valid">{{action}}</button>
+        <button *ngIf="action == 'Delete'" mat-button (click)="doAction()">{{action}}</button>
+      </div>
+    </form>
+   
+
